@@ -3,7 +3,7 @@ from torch import nn
 
 
 
-class ResNetModel(torch.nn.Module):
+class BasicModel(torch.nn.Module):
 
     """
     This is a basic backbone for SSD.
@@ -34,8 +34,8 @@ class ResNetModel(torch.nn.Module):
         self.model = torchvision.models.resnet152(pretrained=True)
 
         # remove last fully-connected layer
-        # new_classifier = nn.Sequential(*list(self.model.classifier.children())[:-1])
-        # model.classifier = new_classifier
+        new_classifier = nn.Sequential(*list(self.model.classifier.children())[:-1])
+        model.classifier = new_classifier
 
         # for param in self.model.parameters():  # Freeze all parameters
         #     param.requires_grad = False
