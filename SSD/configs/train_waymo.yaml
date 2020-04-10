@@ -7,8 +7,6 @@ MODEL:
         #OUT_CHANNELS: [128, 128, 256, 128, 128, 64, 64]
         #OUT_CHANNELS: [128, 256, 128, 128, 64, 64]
         OUT_CHANNELS: [128, 256, 512, 256, 128, 64]
-        NAME: 'improved'
-        PRETRAINED: True
         OUT_CHANNELS: [128, 256, 128, 128, 64, 64]
         INPUT_CHANNELS: 3
 INPUT:
