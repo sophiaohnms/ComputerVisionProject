@@ -1,9 +1,9 @@
 import torch
 from torch import nn
 
-original_model = torchvision.models.resnet18(pretrained=True)
+original_model = torchvision.models.resnet152(pretrained=True)
 
-class BasicModel(torch.nn.Module):
+class ImprovedModel(torch.nn.Module):
 
     """
     This is a basic backbone for SSD.
@@ -32,9 +32,29 @@ class BasicModel(torch.nn.Module):
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
         image_channels = 3
 
-        self.features = nn.Sequential(
+        self.features1 = nn.Sequential(
             # stop at last layer
             *list(original_model.features.children())[:-1]
+
+        self.features2 = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-2]
+
+        self.features3 = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-3]
+
+        self.features4 = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-4]
+
+        self.features5 = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-5]
+
+        self.features6 = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-6]
         )
 
     def forward(self, x):
@@ -51,7 +71,18 @@ class BasicModel(torch.nn.Module):
             shape(-1, output_channels[0], 38, 38),
         """
 
-        x = self.features(x)
-        print(x.shape[1:])
-        return x
+        out1 = self.features1(x)
+        out2 = self.features2(x)
+        out3 = self.features3(x)
+        out4 = self.features4(x)
+        out5 = self.features5(x)
+        out6 = self.features6(x)
+
+        out_features = [out6, out5, out4, out3, out2, out1]
+
+        for idx, feature in enumerate(out_features):
+            out_channel = self.output_channels[idx]
+            feature_map_size = self.output_feature_size[idx]
+
+        return tuple(out_features)
 
