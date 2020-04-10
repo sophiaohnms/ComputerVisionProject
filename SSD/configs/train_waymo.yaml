@@ -1,7 +1,7 @@
 MODEL:
     NUM_CLASSES: 5
     BACKBONE:
-        NAME: 'basic'
+        NAME: 'improved'
         #NAME: 'vgg'
         PRETRAINED: False
         #OUT_CHANNELS: [128, 128, 256, 128, 128, 64, 64]
