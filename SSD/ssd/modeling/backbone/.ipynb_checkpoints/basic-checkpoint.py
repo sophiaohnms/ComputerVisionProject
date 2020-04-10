@@ -192,7 +192,7 @@ class BasicModel(torch.nn.Module):
             nn.Conv2d(
                 in_channels=self.output_channels[4],
                 out_channels=128,
-                kernel_size=(2,3),
+                kernel_size=fc,
                 stride=1,
                 padding=pc
             ),
@@ -240,7 +240,7 @@ class BasicModel(torch.nn.Module):
         for idx, feature in enumerate(out_features):
             out_channel = self.output_channels[idx]
             feature_map_size = self.output_feature_size[idx]
-            #print(feature.shape[1:])
+
             expected_shape = (out_channel, feature_map_size, feature_map_size)
             #assert feature.shape[1:] == expected_shape, \
                 #f"Expected shape: {expected_shape}, got: {feature.shape[1:]} at output IDX: {idx}"
