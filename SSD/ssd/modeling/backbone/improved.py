@@ -52,5 +52,6 @@ class BasicModel(torch.nn.Module):
         """
 
         x = self.features(x)
+        print(x.shape[1:])
         return x
 
