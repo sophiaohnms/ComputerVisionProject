@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-original_model = torchvision.models.resnet152(pretrained=True)
+original_model = torchvision.models.resnet18(pretrained=True)
 
 class BasicModel(torch.nn.Module):
 
