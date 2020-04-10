@@ -1,6 +1,8 @@
 import torch
 from torch import nn
 
+original_model = torchvision.models.resnet152(pretrained=True)
+
 class BasicModel(torch.nn.Module):
 
     """
@@ -22,7 +24,7 @@ class BasicModel(torch.nn.Module):
                 image_channels. Number of color channels in image (3)
                 num_classes: Number of classes we want to predict (10)
         """
-        super().__init__()
+        super(BasicModel, self).__init__()
         image_size = cfg.INPUT.IMAGE_SIZE
         output_channels = cfg.MODEL.BACKBONE.OUT_CHANNELS
         self.output_channels = output_channels
@@ -30,7 +32,10 @@ class BasicModel(torch.nn.Module):
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
         image_channels = 3
 
-        self.model = torchvision.models.resnet152(pretrained=True)
+        self.features = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-1]
+        )
 
     def forward(self, x):
         """
@@ -46,6 +51,6 @@ class BasicModel(torch.nn.Module):
             shape(-1, output_channels[0], 38, 38),
         """
 
-        x = self.model(x)
+        x = self.features(x)
         return x
 
