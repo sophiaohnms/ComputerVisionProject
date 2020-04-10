@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-
+original_model = torchvision.models.resnet152(pretrained=True)
 
 class BasicModel(torch.nn.Module):
 
@@ -16,6 +16,7 @@ class BasicModel(torch.nn.Module):
      shape(-1, output_channels[4], 1, 1)]
      where "output_channels" is the same as cfg.BACKBONE.OUT_CHANNELS
     """
+
     def __init__(self, cfg):
         """
             Is called when model is initialized.
@@ -31,23 +32,10 @@ class BasicModel(torch.nn.Module):
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
         image_channels = 3
 
-        self.model = torchvision.models.resnet152(pretrained=True)
-
-        # remove last fully-connected layer
-        model.feature_extractor = nn.Sequential(*list(self.model.classifier.children())[:-1])
-
-        # for param in self.model.parameters():  # Freeze all parameters
-        #     param.requires_grad = False
-        #
-        # for param in self.model.fc.parameters():  # Unfreeze the last fully-connected
-        #     param.requires_grad = True  # layer
-        #
-        # for param in self.model.layer4.parameters():  # Unfreeze the last 5 convolutional
-        #     param.requires_grad = True  # layers
-
-    # def forward(self, x):
-    #     x = self.model(x)
-    #     return x
+        self.features = nn.Sequential(
+            # stop at last layer
+            *list(original_model.features.children())[:-1]
+        )
 
     def forward(self, x):
         """
@@ -63,7 +51,6 @@ class BasicModel(torch.nn.Module):
             shape(-1, output_channels[0], 38, 38),
         """
 
-        x = self.model(x)
-
+        x = self.features(x)
         return x
 
