@@ -1,8 +1,6 @@
 import torch
 from torch import nn
 
-original_model = torchvision.models.resnet152(pretrained=True)
-
 class BasicModel(torch.nn.Module):
 
     """
@@ -32,10 +30,7 @@ class BasicModel(torch.nn.Module):
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
         image_channels = 3
 
-        self.features = nn.Sequential(
-            # stop at last layer
-            *list(original_model.features.children())[:-1]
-        )
+        self.model = torchvision.models.resnet152(pretrained=True)
 
     def forward(self, x):
         """
@@ -51,6 +46,6 @@ class BasicModel(torch.nn.Module):
             shape(-1, output_channels[0], 38, 38),
         """
 
-        x = self.features(x)
+        x = self.model(x)
         return x
 
