@@ -33,7 +33,7 @@ class BasicModel(torch.nn.Module):
         self.features6 = nn.Sequential(
             # stop at 6th last layer
             *list(original_model.features.children())[:-6])
-        )
+
 
     def forward(self, x):
 
