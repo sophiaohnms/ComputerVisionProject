@@ -4,7 +4,7 @@ from torchvision import models
 
 original_model = models.resnet34(pretrained=True)
 
-class BasicModel(torch.nn.Module):
+class ImprovedModel(torch.nn.Module):
 
     def __init__(self, cfg):
 
