@@ -1,7 +1,7 @@
 MODEL:
     NUM_CLASSES: 5
     BACKBONE:
-        NAME: 'improved'
+        NAME: 'vgg'
         #NAME: 'basic'
         PRETRAINED: False
         #OUT_CHANNELS: [128, 128, 256, 128, 128, 64, 64]
@@ -18,5 +18,5 @@ SOLVER:
     GAMMA: 0.1
     BATCH_SIZE: 32
     LR: 3e-3
-OUTPUT_DIR: 'outputs/basic'
+OUTPUT_DIR: 'outputs/vgg'
 DATASET_DIR: "datasets"
