@@ -8,7 +8,7 @@ class ImprovedModel(torch.nn.Module):
 
     def __init__(self, cfg):
 
-        super(BasicModel, self).__init__()
+        super(ImprovedModel, self).__init__()
 
         self.features1 = nn.Sequential(
             # stop at last layer
