@@ -46,8 +46,8 @@ class BasicModel(torch.nn.Module):
 
         out_features = [out6, out5, out4, out3, out2, out1]
 
-        for idx, feature in enumerate(out_features):
-            print(feature.shape[1:])
+        #for idx, feature in enumerate(out_features):
+            #print(feature.shape[1:])
 
         return tuple(out_features)
 
