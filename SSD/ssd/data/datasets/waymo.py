@@ -66,12 +66,12 @@ class WaymoDataset(torch.utils.data.Dataset):
             image_ids = self.image_ids[num_train_images:]
         return image_ids
 
-        def read_image_ids(self, split):
-            images = self.data_dir.joinpath("images").glob("*.jpg")
-            image_ids = [int(x.stem) for x in images]
-            image_ids.sort()
+    def read_image_ids(self, split):
+        images = self.data_dir.joinpath("images").glob("*.jpg")
+        image_ids = [int(x.stem) for x in images]
+        image_ids.sort()
 
-            return image_ids
+        return image_ids
 
     def _get_annotation(self, image_id):
         label = self.labels[image_id]
