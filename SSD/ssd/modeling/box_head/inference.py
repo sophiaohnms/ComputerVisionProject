@@ -38,6 +38,7 @@ class PostProcessor:
             indices = torch.nonzero(scores > self.cfg.TEST.CONFIDENCE_THRESHOLD).squeeze(1)
             boxes, scores, labels = boxes[indices], scores[indices], labels[indices]
 
+            print(boxes[:, 0::2], type(boxes[:, 0::2]))
             boxes[:, 0::2] *= self.width
             boxes[:, 1::2] *= self.height
 
