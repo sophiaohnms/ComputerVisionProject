@@ -1,12 +1,13 @@
 import torch
 from torch import nn
+from torchvision import models
 
-original_model = torchvision.models.resnet152(pretrained=True)
+original_model = models.resnet152(pretrained=True)
 
 class ImprovedModel(torch.nn.Module):
 
     """
-    This is a basic backbone for SSD.
+    This is a resnet 152 backbone for SSD.
     The feature extractor outputs a list of 6 feature maps, with the sizes:
     [shape(-1, output_channels[0], 38, 38),
      shape(-1, output_channels[1], 19, 19),
@@ -37,39 +38,27 @@ class ImprovedModel(torch.nn.Module):
             *list(original_model.features.children())[:-1]
 
         self.features2 = nn.Sequential(
-            # stop at last layer
+            # stop at 2nd last layer
             *list(original_model.features.children())[:-2]
 
         self.features3 = nn.Sequential(
-            # stop at last layer
+            # stop at 3rd last layer
             *list(original_model.features.children())[:-3]
 
         self.features4 = nn.Sequential(
-            # stop at last layer
+            # stop at 4th last layer
             *list(original_model.features.children())[:-4]
 
         self.features5 = nn.Sequential(
-            # stop at last layer
+            # stop at 5th last layer
             *list(original_model.features.children())[:-5]
 
         self.features6 = nn.Sequential(
-            # stop at last layer
+            # stop at 6th last layer
             *list(original_model.features.children())[:-6]
         )
 
     def forward(self, x):
-        """
-        The forward functiom should output features with shape:
-            [shape(-1, output_channels[0], 38, 38),
-            shape(-1, output_channels[1], 19, 19),
-            shape(-1, output_channels[2], 10, 10),
-            shape(-1, output_channels[3], 5, 5),
-            shape(-1, output_channels[3], 3, 3),
-            shape(-1, output_channels[4], 1, 1)]
-        We have added assertion tests to check this, iteration through out_features,
-        where out_features[0] should have the shape:
-            shape(-1, output_channels[0], 38, 38),
-        """
 
         out1 = self.features1(x)
         out2 = self.features2(x)
@@ -81,8 +70,7 @@ class ImprovedModel(torch.nn.Module):
         out_features = [out6, out5, out4, out3, out2, out1]
 
         for idx, feature in enumerate(out_features):
-            out_channel = self.output_channels[idx]
-            feature_map_size = self.output_feature_size[idx]
+            print(feature.shape[1:])
 
         return tuple(out_features)
 
