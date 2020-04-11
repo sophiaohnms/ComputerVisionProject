@@ -2,38 +2,38 @@ import torch
 from torch import nn
 from torchvision import models
 
-original_model = models.resnet152(pretrained=True)
+original_model = models.resnet34(pretrained=True)
 
-class ImprovedModel(torch.nn.Module):
+class BasicModel(torch.nn.Module):
 
     def __init__(self, cfg):
 
-        super(ImprovedModel, self).__init__()
+        super(BasicModel, self).__init__()
 
         self.features1 = nn.Sequential(
             # stop at last layer
-            *list(original_model.features.children())[:-1]
+            *list(original_model.children())[:-1])
 
         self.features2 = nn.Sequential(
             # stop at 2nd last layer
-            *list(original_model.features.children())[:-2]
+            *list(original_model.children())[:-2])
 
         self.features3 = nn.Sequential(
             # stop at 3rd last layer
-            *list(original_model.features.children())[:-3]
+            *list(original_model.children())[:-3])
 
         self.features4 = nn.Sequential(
             # stop at 4th last layer
-            *list(original_model.features.children())[:-4]
+            *list(original_model.children())[:-4])
 
         self.features5 = nn.Sequential(
             # stop at 5th last layer
-            *list(original_model.features.children())[:-5]
+            *list(original_model.children())[:-5])
 
         self.features6 = nn.Sequential(
             # stop at 6th last layer
-            *list(original_model.features.children())[:-6]
-        )
+            *list(original_model.children())[:-6])
+
 
     def forward(self, x):
 
@@ -46,8 +46,8 @@ class ImprovedModel(torch.nn.Module):
 
         out_features = [out6, out5, out4, out3, out2, out1]
 
-        for idx, feature in enumerate(out_features):
-            print(feature.shape[1:])
+        #for idx, feature in enumerate(out_features):
+            #print(feature.shape[1:])
 
         return tuple(out_features)
 

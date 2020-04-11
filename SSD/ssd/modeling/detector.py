@@ -35,9 +35,13 @@ def build_backbone(cfg):
         model = BasicModel(cfg)
         return model
     if backbone_name == "vgg":
+
         model = VGG(cfg)
         if cfg.MODEL.BACKBONE.PRETRAINED:
             state_dict = load_state_dict_from_url(
                 "https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth")
             model.init_from_pretrain(state_dict)
+        return model
+    if backbone_name == "improved":
+        model = ImprovedModel(cfg)
         return model
