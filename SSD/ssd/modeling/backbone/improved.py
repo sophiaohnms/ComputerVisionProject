@@ -41,10 +41,8 @@ class ImprovedModel(torch.nn.Module):
         out2 = self.features2(x)
         out3 = self.features3(x)
         out4 = self.features4(x)
-        out5 = self.features5(x)
-        out6 = self.features6(x)
 
-        out_features = [out6, out5, out4, out3, out2, out1]
+        out_features = [out4, out3, out2, out1]
 
         #for idx, feature in enumerate(out_features):
             #print(feature.shape[1:])
