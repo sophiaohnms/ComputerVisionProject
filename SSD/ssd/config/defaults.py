@@ -34,8 +34,8 @@ cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
 cfg.MODEL.PRIORS = CN()
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[80, 60], [40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] #Resolution of the input feature maps. *Try to include a higher layer (76) and make it a list of tuples, such as [[30,40], [15, 25], etc]
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [38, 19, 10, 5, 3, 1]
-#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] #basic
-cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet 18
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]] #basic
+#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet 18
 
 cfg.MODEL.PRIORS.STRIDES = [4, 8, 16, 32, 64, 100, 320] #Number of pixels between each box (In this case is: image size / feature map)
 cfg.MODEL.PRIORS.STRIDES = [8, 16, 32, 64, 100, 320]
