@@ -9,43 +9,83 @@ class ImprovedModel(torch.nn.Module):
     def __init__(self, cfg):
 
         super(ImprovedModel, self).__init__()
+        print(original_model)
+        
+        self.layer1 = nn.Sequential(
+            *list(original_model.children())[0:6]
+        )
+        print("THIS IS LAY 1: ", self.layer1)
 
-        self.features1 = nn.Sequential(
-            # stop at last layer
-            *list(original_model.children())[:-1])
-
-        self.features2 = nn.Sequential(
-            # stop at 2nd last layer
-            *list(original_model.children())[:-2])
-
-        self.features3 = nn.Sequential(
-            # stop at 3rd last layer
-            *list(original_model.children())[:-3])
-
-        self.features4 = nn.Sequential(
-            # stop at 4th last layer
-            *list(original_model.children())[:-4])
-
-        self.features5 = nn.Sequential(
-            # stop at 5th last layer
-            *list(original_model.children())[:-5])
-
-        self.features6 = nn.Sequential(
-            # stop at 6th last layer
-            *list(original_model.children())[:-6])
+        self.layer2 = nn.Sequential(
+            *list(original_model.children())[6:7]
+        )
+        print("AND THIS IS LAY 2", self.layer2)
+        
+        self.layer3 = nn.Sequential(
+            *list(original_model.children())[7:8]
+        )
+        print("AND HERE IT COMES: ", self.layer3)
+        
+           
+        self.layer4 = nn.Sequential(
+            nn.Conv2d(512, 128, kernel_size=(3,3), stride=1, padding=1),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.BatchNorm2d(128),
+            nn.ReLU()              
+        )
+        
+        self.layer5 = nn.Sequential(
+            nn.Conv2d(128, 128, kernel_size=(2,3), stride=1, padding=1),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.BatchNorm2d(128),
+            nn.ReLU()              
+        )
+        self.layer6 = nn.Sequential(
+            nn.Conv2d(128, 64, kernel_size=(3,3), stride=1, padding=1),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        
+        )
+        
+        #self.layer6 = nn.Sequential(
+        #    *list(original_model.children())[8:9]
+       # )
+        
+        
 
 
     def forward(self, x):
+        
+        #print("Input: ", x.size())
+        l1 = self.layer1(x)
+        #print("L1: ", l1.size())
+        l2 = self.layer2(l1)
+        #print("L2: ", l2.size())
+        l3 = self.layer3(l2)
+        #print("L3: ", l3.size())
+        l4 = self.layer4(l3)
+        #print("L4: ", l4.size())
+        l5 = self.layer5(l4)
+        #print("L5: ", l5.size())
+        l6 = self.layer6(l5)
+        #print("L6: ", l6.size())
+        
+        
+        
+        #oa = self.slayer4(l6)
+        #print("finsihed: ", oa.size())
+        
+        #l4 = self.slayer4(l3)
+        #print("nowno now: ", l4.size())
+        
+        
+        #out1 = self.features1(x)
+        #out2 = self.features2(x)
+        #out3 = self.features3(x)
+        #out4 = self.features4(x)
 
-        out1 = self.features1(x)
-        out2 = self.features2(x)
-        out3 = self.features3(x)
-        out4 = self.features4(x)
-
-        out_features = [out4, out3, out2, out1]
+        out_features = [l1, l2, l3, l4, l5, l6]
 
         #for idx, feature in enumerate(out_features):
             #print(feature.shape[1:])
 
         return tuple(out_features)
-
