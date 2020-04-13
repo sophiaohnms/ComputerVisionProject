@@ -15,17 +15,17 @@ class ImprovedModel(torch.nn.Module):
         self.layer1 = nn.Sequential(
             *list(original_model.children())[0:6]
         )
-        print("THIS IS LAY 1: ", self.layer1)
+        #print("THIS IS LAY 1: ", self.layer1)
 
         self.layer2 = nn.Sequential(
             *list(original_model.children())[6:7]
         )
-        print("AND THIS IS LAY 2", self.layer2)
+        #print("AND THIS IS LAY 2", self.layer2)
         
         self.layer3 = nn.Sequential(
             *list(original_model.children())[7:8]
         )
-        print("AND HERE IT COMES: ", self.layer3)
+        #print("AND HERE IT COMES: ", self.layer3)
         
            
         self.layer4 = nn.Sequential(
@@ -36,7 +36,7 @@ class ImprovedModel(torch.nn.Module):
         )
         
         self.layer5 = nn.Sequential(
-            nn.Conv2d(128, 128, kernel_size=(2,3), stride=1, padding=1),
+            nn.Conv2d(128, 128, kernel_size=(2,3), stride=1, padding=1), #From [5,4] to [2,2]
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.BatchNorm2d(128),
             nn.ReLU()              
@@ -57,17 +57,17 @@ class ImprovedModel(torch.nn.Module):
     def forward(self, x):
         
         print("Input: ", x.size())
-        l1 = self.layer1(x)
+        #l1 = self.layer1(x)
         print("L1: ", l1.size())
-        l2 = self.layer2(l1)
+        #l2 = self.layer2(l1)
         print("L2: ", l2.size())
-        l3 = self.layer3(l2)
+        #l3 = self.layer3(l2)
         print("L3: ", l3.size())
-        l4 = self.layer4(l3)
+        #l4 = self.layer4(l3)
         print("L4: ", l4.size())
-        l5 = self.layer5(l4)
+        #l5 = self.layer5(l4)
         print("L5: ", l5.size())
-        l6 = self.layer6(l5)
+        #l6 = self.layer6(l5)
         print("L6: ", l6.size())
         
         
