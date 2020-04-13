@@ -29,17 +29,23 @@ class ImprovedModel(torch.nn.Module):
         
            
         self.layer4 = nn.Sequential(
-            nn.Conv2d(512, 128, kernel_size=(3,3), stride=1, padding=1),
+            nn.Conv2d(512, 256, kernel_size=(3,3), stride=1, padding=1),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.BatchNorm2d(128),
-            nn.ReLU()              
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            nn.Conv2d(256, 256, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(256),
+            nn.ReLU()  
         )
         
         self.layer5 = nn.Sequential(
-            nn.Conv2d(128, 128, kernel_size=(2,3), stride=1, padding=1), #From [5,4] to [2,2]
+            nn.Conv2d(256, 128, kernel_size=(2,3), stride=1, padding=1), #From [5,4] to [2,2]
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.BatchNorm2d(128),
-            nn.ReLU()              
+            nn.ReLU(),
+            nn.Conv2d(128, 128, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU()  
         )
         self.layer6 = nn.Sequential(
             nn.Conv2d(128, 64, kernel_size=(3,3), stride=1, padding=1),

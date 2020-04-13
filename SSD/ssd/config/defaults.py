@@ -40,7 +40,7 @@ cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]]
 cfg.MODEL.PRIORS.STRIDES = [4, 8, 16, 32, 64, 100, 320] #Number of pixels between each box (In this case is: image size / feature map)
 cfg.MODEL.PRIORS.STRIDES = [8, 16, 32, 64, 100, 320]
 cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [106,80], [320, 240]]
-
+cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [160,120], [320, 240]]
 
 cfg.MODEL.PRIORS.MIN_SIZES = [20, 30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 10,20 at the beginning
 cfg.MODEL.PRIORS.MAX_SIZES = [30, 60, 111, 162, 213, 264, 315]
