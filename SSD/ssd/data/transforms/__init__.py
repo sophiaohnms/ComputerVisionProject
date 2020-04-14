@@ -23,14 +23,11 @@ def build_transforms(cfg, is_train=True):
             RandomSampleCrop(), # "zoom-in" like in SSD paper
             #________________________________________
             Resize(cfg.INPUT.IMAGE_SIZE),
-            SubtractMeans(cfg.INPUT.PIXEL_MEAN),
+            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
             ToTensor(),
 
             # potential additional transformations
-            
-            #NORMALIZATION: Divide by std
-            
-            #Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            # add rain etc from albumentation package
         ]
     else:
         transform = [
