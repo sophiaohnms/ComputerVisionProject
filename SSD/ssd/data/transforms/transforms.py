@@ -112,8 +112,7 @@ class ToPercentCoords(object):
 
     
 class Normalize(object):
-      
-    class SubtractMeans(object):
+
     def __init__(self, mean, std):
         self.mean = np.array(mean, dtype=np.float32)
         self.std = np.array(std, dtype=np.float32)
