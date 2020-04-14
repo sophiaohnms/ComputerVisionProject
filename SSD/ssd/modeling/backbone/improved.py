@@ -81,7 +81,7 @@ class ImprovedModel(torch.nn.Module):
 
         out_features = [l1, l2, l3, l4, l5, l6]
 
-        #for idx, feature in enumerate(out_features):
-            #print(feature.shape[1:])
+        for idx, feature in enumerate(out_features):
+            print(feature.shape[1:])
 
         return tuple(out_features)
