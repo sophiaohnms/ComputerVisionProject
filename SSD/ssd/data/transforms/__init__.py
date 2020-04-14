@@ -15,15 +15,22 @@ def build_transforms(cfg, is_train=True):
             RandomBrightness(), #Basic transformations
             RandomContrast(),
             RandomSaturation(),
-            RandomSampleCrop(),
+            #RandomHue(),
+            #RandomLightingNoise(),
+            Expand(cfg.INPUT.PIXEL_MEAN),  # has to be before random sample crop
+                                           # requires doubling training iterations
+                                           # and is suggested by ssd paper to detect small objects
+            RandomSampleCrop(), # "zoom-in" like in SSD paper
             #________________________________________
             Resize(cfg.INPUT.IMAGE_SIZE),
             SubtractMeans(cfg.INPUT.PIXEL_MEAN),
             ToTensor(),
+
+            # potential additional transformations
             
             #NORMALIZATION: Divide by std
             
-            #Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])            
+            #Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ]
     else:
         transform = [
