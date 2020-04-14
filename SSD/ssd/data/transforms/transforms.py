@@ -234,9 +234,10 @@ class RandomSampleCrop(object):
         self.sample_options = (
             # using entire original input image
             None,
-            # sample a patch s.t. MIN jaccard w/ obj in .1,.3,.4,.7,.9
+            # sample a patch s.t. MIN jaccard w/ obj in .1,.3,.5,.7,.9
             (0.1, None),
             (0.3, None),
+            (0.5, None),  # added 0.5 like in SSD paper
             (0.7, None),
             (0.9, None),
             # randomly sample a patch
@@ -264,8 +265,8 @@ class RandomSampleCrop(object):
             for _ in range(50):
                 current_image = image
 
-                w = random.uniform(0.3 * width, width)
-                h = random.uniform(0.3 * height, height)
+                w = random.uniform(0.1 * width, width)  # changed to 0.1 like in SSD paper
+                h = random.uniform(0.1 * height, height)
 
                 # aspect ratio constraint b/t .5 & 2
                 if h / w < 0.5 or h / w > 2:
