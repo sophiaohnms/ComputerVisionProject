@@ -8,7 +8,7 @@ MODEL:
         #OUT_CHANNELS: [128, 256, 512, 256, 128, 64] # basic
         #OUT_CHANNELS: [128, 256, 512, 512] # resnet18
         
-        OUT_CHANNELS: [128, 256, 512, 128, 128, 64] #resnet34
+        OUT_CHANNELS: [128, 256, 512, 128, 128, 128] #resnet34
         
         #Try different OUT_CHANNELS ?
         
