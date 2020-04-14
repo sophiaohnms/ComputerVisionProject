@@ -1,7 +1,13 @@
+TO DO:
 Data augmentation
 Optimizers: ADAM or SGD(with and without nesterov)
-Feature maps: [2,2] or [3,3]* (Adjust the prior_box strides)
+
 Out_channels: why [128, 256, 512, 128, 64, 64] and no others? 
 Transform: Normalize()
 Learning rate: scheduler 
 Freeze layers on the pre-trained model for Waymo dataset?
+
+
+
+SOLVED:
+Feature maps: [2,2] or [3,3]* (Adjust the prior_box strides) 
