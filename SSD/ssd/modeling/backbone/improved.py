@@ -68,17 +68,17 @@ class ImprovedModel(torch.nn.Module):
         
         #print("Input: ", x.size())
         l1 = self.layer1(x)
-        #print("L1: ", l1.size())
+        print("L1: ", l1.size())
         l2 = self.layer2(l1)
-        #print("L2: ", l2.size())
+        print("L2: ", l2.size())
         l3 = self.layer3(l2)
-        #print("L3: ", l3.size())
+        print("L3: ", l3.size())
         l4 = self.layer4(l3)
-        #print("L4: ", l4.size())
+        print("L4: ", l4.size())
         l5 = self.layer5(l4)
-        #print("L5: ", l5.size())
+        print("L5: ", l5.size())
         l6 = self.layer6(l5)
-        #print("L6: ", l6.size())
+        print("L6: ", l6.size())
 
         out_features = [l1, l2, l3, l4, l5, l6]
 
