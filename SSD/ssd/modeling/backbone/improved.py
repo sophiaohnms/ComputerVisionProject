@@ -1,57 +1,97 @@
 import torch
 from torch import nn
+from torchvision import models
 
-original_model = torchvision.models.resnet18(pretrained=True)
+original_model = models.resnet34(pretrained=True)
 
-class BasicModel(torch.nn.Module):
-
-    """
-    This is a basic backbone for SSD.
-    The feature extractor outputs a list of 6 feature maps, with the sizes:
-    [shape(-1, output_channels[0], 38, 38),
-     shape(-1, output_channels[1], 19, 19),
-     shape(-1, output_channels[2], 10, 10),
-     shape(-1, output_channels[3], 5, 5),
-     shape(-1, output_channels[3], 3, 3),
-     shape(-1, output_channels[4], 1, 1)]
-     where "output_channels" is the same as cfg.BACKBONE.OUT_CHANNELS
-    """
-
+class ImprovedModel(torch.nn.Module):
+    
     def __init__(self, cfg):
-        """
-            Is called when model is initialized.
-            Args:
-                image_channels. Number of color channels in image (3)
-                num_classes: Number of classes we want to predict (10)
-        """
-        super(BasicModel, self).__init__()
-        image_size = cfg.INPUT.IMAGE_SIZE
-        output_channels = cfg.MODEL.BACKBONE.OUT_CHANNELS
-        self.output_channels = output_channels
-        image_channels = cfg.MODEL.BACKBONE.INPUT_CHANNELS
-        self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
-        image_channels = 3
+              
 
-        self.features = nn.Sequential(
-            # stop at last layer
-            *list(original_model.features.children())[:-1]
+        super(ImprovedModel, self).__init__()
+        print(original_model)
+        
+        self.layer1 = nn.Sequential(
+            *list(original_model.children())[0:6]
         )
+        #print("THIS IS LAY 1: ", self.layer1)
+
+        self.layer2 = nn.Sequential(
+            *list(original_model.children())[6:7]
+        )
+        #print("AND THIS IS LAY 2", self.layer2)
+        
+        self.layer3 = nn.Sequential(
+            *list(original_model.children())[7:8]
+        )
+        #print("AND HERE IT COMES: ", self.layer3)
+        
+           
+        self.layer4 = nn.Sequential(
+            nn.Conv2d(512, 256, kernel_size=(2,3), stride=1, padding=1),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            nn.Conv2d(256, 128, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU()  
+        )
+        
+        self.layer5 = nn.Sequential(
+            nn.Conv2d(128, 128, kernel_size=(2,3), stride=1, padding=1), #From [5,4] to [2,2] or [3,3] ?
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.BatchNorm2d(128),
+            nn.ReLU(),
+            nn.Conv2d(128, 64, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU()  
+        )
+        self.layer6 = nn.Sequential(
+            nn.AdaptiveAvgPool2d(output_size=(1, 1))
+        
+        )
+        
+        #self.layer6 = nn.Sequential(
+        #    *list(original_model.children())[8:9]
+       # )
+        
+        
+
 
     def forward(self, x):
-        """
-        The forward functiom should output features with shape:
-            [shape(-1, output_channels[0], 38, 38),
-            shape(-1, output_channels[1], 19, 19),
-            shape(-1, output_channels[2], 10, 10),
-            shape(-1, output_channels[3], 5, 5),
-            shape(-1, output_channels[3], 3, 3),
-            shape(-1, output_channels[4], 1, 1)]
-        We have added assertion tests to check this, iteration through out_features,
-        where out_features[0] should have the shape:
-            shape(-1, output_channels[0], 38, 38),
-        """
+        
+        #print("Input: ", x.size())
+        l1 = self.layer1(x)
+        #print("L1: ", l1.size())
+        l2 = self.layer2(l1)
+        #print("L2: ", l2.size())
+        l3 = self.layer3(l2)
+        #print("L3: ", l3.size())
+        l4 = self.layer4(l3)
+        #print("L4: ", l4.size())
+        l5 = self.layer5(l4)
+        #print("L5: ", l5.size())
+        l6 = self.layer6(l5)
+        #print("L6: ", l6.size())
+        
+        
+        
+        #oa = self.slayer4(l6)
+        #print("finsihed: ", oa.size())
+        
+        #l4 = self.slayer4(l3)
+        #print("nowno now: ", l4.size())
+        
+        
+        #out1 = self.features1(x)
+        #out2 = self.features2(x)
+        #out3 = self.features3(x)
+        #out4 = self.features4(x)
 
-        x = self.features(x)
-        print(x.shape[1:])
-        return x
+        out_features = [l1, l2, l3, l4, l5, l6]
 
+        #for idx, feature in enumerate(out_features):
+            #print(feature.shape[1:])
+
+        return tuple(out_features)
