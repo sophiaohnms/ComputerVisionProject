@@ -7,7 +7,6 @@ original_model = models.resnet34(pretrained=True)
 class ImprovedModel(torch.nn.Module):
     
     def __init__(self, cfg):
-              
 
         super(ImprovedModel, self).__init__()
         #print(original_model)
@@ -44,8 +43,8 @@ class ImprovedModel(torch.nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=(3,3), stride=1, padding=1),
-            nn.BatchNorm2d(64),
+            nn.Conv2d(64, 128, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(128),
             nn.ReLU()  
         )
         
@@ -82,7 +81,7 @@ class ImprovedModel(torch.nn.Module):
 
         out_features = [l1, l2, l3, l4, l5, l6]
 
-        #for idx, feature in enumerate(out_features):
-            #print(feature.shape[1:])
+        for idx, feature in enumerate(out_features):
+            print(feature.shape[1:])
 
         return tuple(out_features)
