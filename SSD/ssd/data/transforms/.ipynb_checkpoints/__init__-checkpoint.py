@@ -2,6 +2,7 @@ from ssd.modeling.box_head.prior_box import PriorBox
 from .target_transform import SSDTargetTransform
 from .transforms import *
 
+normalize = transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
 
 def build_transforms(cfg, is_train=True):
     if is_train:
@@ -17,6 +18,7 @@ def build_transforms(cfg, is_train=True):
             Resize(cfg.INPUT.IMAGE_SIZE),
             SubtractMeans(cfg.INPUT.PIXEL_MEAN),
             ToTensor(),
+            #Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])            
         ]
     else:
         transform = [
