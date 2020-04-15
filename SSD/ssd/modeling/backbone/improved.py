@@ -14,7 +14,7 @@ class ImprovedModel(torch.nn.Module):
         self.layer1 = nn.Sequential(
             *list(original_model.children())[0:6]
         )
-        #print("Layer 1: ", self.layer1)
+        print("Layer 1: ", self.layer1)
 
         self.layer2 = nn.Sequential(
             *list(original_model.children())[6:7]
