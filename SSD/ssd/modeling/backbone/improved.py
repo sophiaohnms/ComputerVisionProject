@@ -9,7 +9,7 @@ class ImprovedModel(torch.nn.Module):
     def __init__(self, cfg):
 
         super(ImprovedModel, self).__init__()
-        #print(original_model)
+        print(original_model)
         
         self.layer1 = nn.Sequential(
             *list(original_model.children())[0:6]
