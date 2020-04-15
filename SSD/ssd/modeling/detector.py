@@ -46,3 +46,6 @@ def build_backbone(cfg):
     if backbone_name == "improved":
         model = ImprovedModel(cfg)
         return model
+    if backbone_name == "resnet50":
+        model = Resnet50Model(cfg)
+        return model

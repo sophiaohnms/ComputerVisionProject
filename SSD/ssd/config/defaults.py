@@ -24,6 +24,7 @@ cfg.MODEL.BACKBONE.NAME = 'basic'
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 256, 128, 64) # basic
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (64,64,128,256,512,512) # resnet 18
 cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 512, 512, 128)
+#cfg.MODEL.BACKBONE.OUT_CHANNELS = (512,1024,2048,2048) # resnet 50
 
 
 cfg.MODEL.BACKBONE.PRETRAINED = True
@@ -36,6 +37,7 @@ cfg.MODEL.PRIORS = CN()
 
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]] #basic
 cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,3], [1,1]] #basic
+#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet50
 
 
 cfg.MODEL.PRIORS.STRIDES = [4, 8, 16, 32, 64, 100, 320] #Number of pixels between each box (In this case is: image size / feature map)
