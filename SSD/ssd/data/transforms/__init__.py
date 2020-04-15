@@ -17,7 +17,7 @@ def build_transforms(cfg, is_train=True):
             RandomSaturation(),
             #RandomHue(),
             #RandomLightingNoise(),
-            Expand(cfg.INPUT.PIXEL_MEAN),  # has to be before random sample crop
+            #Expand(cfg.INPUT.PIXEL_MEAN),  # has to be before random sample crop
                                            # requires doubling training iterations
                                            # and is suggested by ssd paper to detect small objects
             RandomSampleCrop(), # "zoom-in" like in SSD paper
