@@ -1,13 +1,14 @@
 TO DO:
-Data augmentation
+Data augmentation -----> Transform "Expand()" breaks the model? (Total Loss was around 800-1000)
+
 Optimizers: ADAM or SGD(with and without nesterov)
 
-Out_channels: why [128, 256, 512, 128, 64, 64] and no others? 
-Transform: Normalize()
 Learning rate: scheduler 
 Freeze layers on the pre-trained model for Waymo dataset?
 
 
 
 SOLVED:
-Feature maps: [2,2] or [3,3]* (Adjust the prior_box strides) 
+Feature maps: [2,2] or [3,3]* (Adjust the prior_box strides) ---> [3,3]
+Out_channels: why [128, 256, 512, 128, 64, 64] and no others? ---> Better to keep increasing channels. 
+Transform: Normalize() ---> SubstractMeans + /std

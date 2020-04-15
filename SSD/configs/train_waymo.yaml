@@ -5,11 +5,13 @@ MODEL:
         #NAME: 'basic'
         PRETRAINED: True
         #OUT_CHANNELS: [128, 128, 256, 128, 128, 64, 64]
-        #OUT_CHANNELS: [128, 256, 512, 256, 128, 64] # basic
+        
         #OUT_CHANNELS: [128, 256, 512, 512] # resnet18
         
         OUT_CHANNELS: [128, 256, 512, 128, 128, 128] #resnet34
         
+        OUT_CHANNELS: [128, 256, 512, 512, 256, 256] #Increased depth of channels
+         
         #Try different OUT_CHANNELS ?
         
         INPUT_CHANNELS: 3

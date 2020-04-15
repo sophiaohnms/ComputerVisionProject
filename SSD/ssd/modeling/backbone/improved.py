@@ -28,37 +28,45 @@ class ImprovedModel(torch.nn.Module):
         
            
         self.layer4 = nn.Sequential(
-            nn.Conv2d(512, 256, kernel_size=(3,3), stride=1, padding=1),
+            nn.Conv2d(512, 512, kernel_size=(3,3), stride=1, padding=1),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.BatchNorm2d(256),
+            nn.BatchNorm2d(512),
             nn.ReLU(),
-            nn.Conv2d(256, 128, kernel_size=(3,3), stride=1, padding=1),
-            nn.BatchNorm2d(128),
+            nn.Conv2d(512, 512, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(512),
             nn.ReLU()  
         )
         #print("Layer 4: ", self.layer4)
         
         self.layer5 = nn.Sequential(
-            nn.Conv2d(128, 64, kernel_size=(1,2), stride=1, padding=1), #From [5,4] to [3,3] 
+            nn.Conv2d(512, 256, kernel_size=(1,2), stride=1, padding=1), #From [5,4] to [3,3] 
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(256),
             nn.ReLU(),
-            nn.Conv2d(64, 128, kernel_size=(3,3), stride=1, padding=1),
-            nn.BatchNorm2d(128),
+            nn.Conv2d(256, 256, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(256),
             nn.ReLU()  
         )
         
         #print("Layer 5: ", self.layer5)
         
-        self.layer6 = nn.Sequential(
-            nn.AdaptiveAvgPool2d(output_size=(1, 1))
         
+        self.layer6 = nn.Sequential(
+            nn.Conv2d(256, 256, kernel_size=(3,3), stride=1, padding=1), #From [5,4] to [3,3] 
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            nn.Conv2d(256, 256, kernel_size=(3,3), stride=1, padding=1)
         )
-        #print("Layer 6: ", self.layer6)
         
         #self.layer6 = nn.Sequential(
-        #    *list(original_model.children())[8:9]
-       # )
+        #    nn.AdaptiveAvgPool2d(output_size=(1, 1))
+        #)
+        
+        
+        #print("Layer 6: ", self.layer6)
+        
+       
         
         
 
