@@ -112,41 +112,17 @@ class ToPercentCoords(object):
 
     
 class Normalize(object):
-      
-    """Normalize a tensor image with mean and standard deviation.
-    Given mean: ``(M1,...,Mn)`` and std: ``(S1,..,Sn)`` for ``n`` channels, this transform
-    will normalize each channel of the input ``torch.*Tensor`` i.e.
-    ``input[channel] = (input[channel] - mean[channel]) / std[channel]``
 
-    .. note::
-        This transform acts out of place, i.e., it does not mutates the input tensor.
+    def __init__(self, mean, std):
+        self.mean = np.array(mean, dtype=np.float32)
+        self.std = np.array(std, dtype=np.float32)
 
-    Args:
-        mean (sequence): Sequence of means for each channel.
-        std (sequence): Sequence of standard deviations for each channel.
-        inplace(bool,optional): Bool to make this operation in-place.
+    def __call__(self, image, boxes=None, labels=None):
+        image = image.astype(np.float32)
+        image -= self.mean
+        image /= self.std
+        return image.astype(np.float32), boxes, labels
 
-    """
-    def __init__(self, mean, std, inplace=False):
-        self.mean = mean
-        self.std = std
-        self.inplace = inplace
-        
-    def __call__(self, tensor):
-        """
-        Args:
-            tensor (Tensor): Tensor image of size (C, H, W) to be normalized.
-
-        Returns:
-            Tensor: Normalized Tensor image.
-        """
-        
-        return F.normalize(tensor, self.mean, self.std, self.inplace)
-
-    
-    def __repr__(self):
-             
-        return self.__class__.__name__ + '(mean={0}, std={1})'.format(self.mean, self.std)
     
     
     
@@ -274,9 +250,10 @@ class RandomSampleCrop(object):
         self.sample_options = (
             # using entire original input image
             None,
-            # sample a patch s.t. MIN jaccard w/ obj in .1,.3,.4,.7,.9
+            # sample a patch s.t. MIN jaccard w/ obj in .1,.3,.5,.7,.9
             (0.1, None),
             (0.3, None),
+            (0.5, None),  # added 0.5 like in SSD paper
             (0.7, None),
             (0.9, None),
             # randomly sample a patch
@@ -304,8 +281,8 @@ class RandomSampleCrop(object):
             for _ in range(50):
                 current_image = image
 
-                w = random.uniform(0.3 * width, width)
-                h = random.uniform(0.3 * height, height)
+                w = random.uniform(0.1 * width, width)  # changed to 0.1 like in SSD paper
+                h = random.uniform(0.1 * height, height)
 
                 # aspect ratio constraint b/t .5 & 2
                 if h / w < 0.5 or h / w > 2:

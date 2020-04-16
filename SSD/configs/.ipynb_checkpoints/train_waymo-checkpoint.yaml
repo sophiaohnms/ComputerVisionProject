@@ -5,10 +5,13 @@ MODEL:
         #NAME: 'basic'
         PRETRAINED: True
         #OUT_CHANNELS: [128, 128, 256, 128, 128, 64, 64]
-        #OUT_CHANNELS: [128, 256, 512, 256, 128, 64] # basic
-        #OUT_CHANNELS: [128, 256, 512, 512] # resnet18
-        OUT_CHANNELS: [128, 256, 512, 128, 64, 64] #resnet34
         
+        #OUT_CHANNELS: [128, 256, 512, 512] # resnet18
+        
+        OUT_CHANNELS: [128, 256, 512, 128, 128, 128] #resnet34
+        
+        OUT_CHANNELS: [128, 256, 512, 512, 256, 256] #Increased depth of channels
+         
         #Try different OUT_CHANNELS ?
         
         INPUT_CHANNELS: 3
@@ -18,10 +21,10 @@ DATASETS:
     TRAIN: ("waymo_train",)
     TEST: ("waymo_val", )
 SOLVER:
-    MAX_ITER: 120000
-    LR_STEPS: [50000, 100000] #Decay: adjust LR
+    MAX_ITER: 30000
+    LR_STEPS: [30000, 100000] #Decay: adjust LR
     GAMMA: 0.1
     BATCH_SIZE: 32
-    LR: 2e-3 #Maybe a little bit too high
+    LR: 1e-3 #Maybe a little bit too high?
 OUTPUT_DIR: 'outputs/improved'
 DATASET_DIR: "datasets"

@@ -22,7 +22,8 @@ cfg.MODEL.BACKBONE.NAME = 'basic'
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (512, 1024, 512, 256, 256, 256)
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 256, 128, 64, 64)
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 256, 128, 64) # basic
-cfg.MODEL.BACKBONE.OUT_CHANNELS = (64,64,128,256,512,512) # resnet 18
+#cfg.MODEL.BACKBONE.OUT_CHANNELS = (64,64,128,256,512,512) # resnet 18
+cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 512, 512, 128)
 
 
 cfg.MODEL.BACKBONE.PRETRAINED = True
@@ -32,15 +33,15 @@ cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
 # PRIORS
 # -----------------------------------------------------------------------------
 cfg.MODEL.PRIORS = CN()
-#cfg.MODEL.PRIORS.FEATURE_MAPS = [[80, 60], [40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] #Resolution of the input feature maps. *Try to include a higher layer (76) and make it a list of tuples, such as [[30,40], [15, 25], etc]
-#cfg.MODEL.PRIORS.FEATURE_MAPS = [38, 19, 10, 5, 3, 1]
-cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]] #basic
-#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet 18
+
+#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]] #basic
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,3], [1,1]] #basic
+
 
 cfg.MODEL.PRIORS.STRIDES = [4, 8, 16, 32, 64, 100, 320] #Number of pixels between each box (In this case is: image size / feature map)
 cfg.MODEL.PRIORS.STRIDES = [8, 16, 32, 64, 100, 320]
-cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [106,80], [320, 240]]
-cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [160,120], [320, 240]]
+cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [106,80], [320, 240]] #for 3x3 box
+#cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [160,120], [320, 240]] #for 2x2 box
 
 cfg.MODEL.PRIORS.MIN_SIZES = [20, 30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 20,30 at the beginning
 cfg.MODEL.PRIORS.MAX_SIZES = [30, 60, 111, 162, 213, 264, 315]
@@ -50,13 +51,13 @@ cfg.MODEL.PRIORS.MAX_SIZES = [30, 60, 111, 162, 213, 264, 315]
 
 
 
-cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2,3], [2, 3], [2, 3], [2, 3], [2], [2]] #Added [2] at the beginning
+cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2,3], [2,3], [2, 3], [2, 3], [2, 3], [2], [2]] #Added [2] at the beginning
 # When has 1 aspect ratio, every location has 4 boxes, 2 ratio 6 boxes.
 # #boxes = 2 + #ratio * 2
 #cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3], [2], [2]]
 
 
-cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 6, 4, 4]  # number of boxes per feature map location. Added 4 at the beginning.
+cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [6, 6, 6, 6, 6, 4, 4]  # number of boxes per feature map location. Added 4 at the beginning.
 #cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 4, 4]
 
 cfg.MODEL.PRIORS.CLIP = True
