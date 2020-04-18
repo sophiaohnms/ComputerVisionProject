@@ -3,7 +3,7 @@ GENERAL TIPS AND TASKS TO DO AFTER Q&A SESSION (16/4):
 
 - ImageNet dataset used fo pretrained models is not that important, since the transfer from waymo to TDT. (This is something Sophia wondered the other day)
 
-- No need to freeze layers when transfering from waymo to TDT.
+- No need to freeze layers when transfering from waymo to TDT (for baselines, but might be still helpful to improve the model even more)
 
 - Using ResNet* as backbone for the first feature map [30, 40] and then adding residual blocks to get the rest of the resolutions. The basic residual block is nothing more than convolutions and downsampling: https://github.com/pytorch/vision/blob/7b60f4db9707d7afdbb87fd4e8ef6906ca014720/torchvision/models/resnet.py#L35
 
@@ -29,7 +29,7 @@ Data augmentation -----> Transform "Expand()" breaks the model? (Total Loss was 
 
 Optimizers: ADAM or SGD(with and without nesterov)
 
-Learning rate: scheduler 
+Learning rate: scheduler + divide LR when loss plateaus like in resnet paper (~every 15 k steps there)
 Freeze layers on the pre-trained model for Waymo dataset?
 
 
