@@ -16,11 +16,13 @@ cfg.MODEL.SIZE_VARIANCE = 0.2
 # Backbone
 # ---------------------------------------------------------------------------- #
 cfg.MODEL.BACKBONE = CN()
-cfg.MODEL.BACKBONE.NAME = 'basic'
+#cfg.MODEL.BACKBONE.NAME = 'basic'
+cfg.MODEL.BACKBONE.NAME = 'improved'
 
 
-cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 512, 512, 128)
+#cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 512, 512, 128)
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (512,1024,2048,2048) # resnet 50
+cfg.MODEL.BACKBONE.OUT_CHANNELS =(128, 256, 512, 512, 256, 256) #improved
 
 
 cfg.MODEL.BACKBONE.PRETRAINED = True
@@ -32,9 +34,9 @@ cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
 cfg.MODEL.PRIORS = CN()
 
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]] #basic
-#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,3], [1,1]] #basic
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,3], [1,1]] #basic improved
 
-cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] #basic
+#cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] #basic
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet50
 
 

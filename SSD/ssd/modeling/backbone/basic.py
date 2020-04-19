@@ -33,18 +33,20 @@ class BasicModel(torch.nn.Module):
 
         fc, pc = 3, 1
         fp, sp = 2, 2
+        num_filt=32
 
         # Define the convolutional layers
         self.bank1 = nn.Sequential(
             nn.Conv2d(
                 in_channels=image_channels,
-                out_channels=32,
+                out_channels=num_filt,
                 kernel_size=fc,
                 stride=1,
                 padding=pc
             ),
             nn.MaxPool2d(kernel_size=fp, stride=sp),
-            nn.ReLU(),                  #nn.BatchNorm2d(32),
+            nn.BatchNorm2d(num_filt),
+            nn.ReLU(),  # nn.BatchNorm2d(32),
             nn.Conv2d(
                 in_channels=32,
                 out_channels=64,
@@ -53,7 +55,8 @@ class BasicModel(torch.nn.Module):
                 padding=pc
             ),
             nn.MaxPool2d(kernel_size=fp, stride=sp),
-            nn.ReLU(),                               #nn.BatchNorm2d(64),   #für andere implemntieren
+            nn.BatchNorm2d(2*num_filt),
+            nn.ReLU(),  # nn.BatchNorm2d(64),   #für andere implemntieren
             nn.Conv2d(
                 in_channels=64,
                 out_channels=64,
@@ -192,7 +195,7 @@ class BasicModel(torch.nn.Module):
             nn.Conv2d(
                 in_channels=self.output_channels[4],
                 out_channels=128,
-                kernel_size=(2,3),
+                kernel_size=fc,
                 stride=1,
                 padding=pc
             ),
@@ -236,6 +239,7 @@ class BasicModel(torch.nn.Module):
         out6 = self.bank6(out5)
 
         out_features = [out1, out2, out3, out4, out5, out6]
+
 
         for idx, feature in enumerate(out_features):
             out_channel = self.output_channels[idx]

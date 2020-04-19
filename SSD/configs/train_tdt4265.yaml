@@ -18,3 +18,4 @@ SOLVER:
     LR: 1e-3
 OUTPUT_DIR: 'outputs/basic'
 DATASET_DIR: "datasets"
+#EVAL_STEP:2000

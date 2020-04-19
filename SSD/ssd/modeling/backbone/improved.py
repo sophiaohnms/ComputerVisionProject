@@ -3,18 +3,19 @@ from torch import nn
 from torchvision import models
 
 original_model = models.resnet34(pretrained=True)
+#test
 
 class ImprovedModel(torch.nn.Module):
     
     def __init__(self, cfg):
 
         super(ImprovedModel, self).__init__()
-        print(original_model)
+        #print(original_model)
         
         self.layer1 = nn.Sequential(
             *list(original_model.children())[0:6]
         )
-        print("Layer 1: ", self.layer1)
+        #print("Layer 1: ", self.layer1)
 
         self.layer2 = nn.Sequential(
             *list(original_model.children())[6:7]
@@ -89,7 +90,7 @@ class ImprovedModel(torch.nn.Module):
 
         out_features = [l1, l2, l3, l4, l5, l6]
 
-        #for idx, feature in enumerate(out_features):
-            #print(feature.shape[1:])
+        for idx, feature in enumerate(out_features):
+            print(feature.shape[1:])
 
         return tuple(out_features)

@@ -10,9 +10,9 @@ def build_transforms(cfg, is_train=True):
             ConvertFromInts(),
             
             #ADD SOME DATA AUGMENTATION
-            RandomMirror(), #Augmentation
+             #Augmentation
             Expand(cfg.INPUT.PIXEL_MEAN),
-            ToPercentCoords(),
+
             RandomBrightness(), #Basic transformations
             RandomContrast(),
             RandomSaturation(),
@@ -22,8 +22,10 @@ def build_transforms(cfg, is_train=True):
                                            # requires doubling training iterations
                                            # and is suggested by ssd paper to detect small objects
             RandomSampleCrop(), # "zoom-in" like in SSD paper
+            RandomMirror(),
+            ToPercentCoords(),
             #________________________________________
-            Resize(cfg.INPUT.IMAGE_SIZE),
+            #Resize(cfg.INPUT.IMAGE_SIZE),
             Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
             ToTensor(),
 

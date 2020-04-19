@@ -1,6 +1,7 @@
 from torch import nn
 from ssd.modeling.backbone.vgg import VGG
 from ssd.modeling.backbone.basic import BasicModel
+from ssd.modeling.backbone.basic_cesar import BasicModelCesar
 from ssd.modeling.backbone.improved import ImprovedModel
 from ssd.modeling.backbone.resnet50 import ResNet50
 from ssd.modeling.box_head.box_head import SSDBoxHead
@@ -35,6 +36,9 @@ def build_backbone(cfg):
     print(backbone_name)
     if backbone_name == "basic":
         model = BasicModel(cfg)
+        return model
+    if backbone_name == "basic_cesar":
+        model = BasicModelCesar(cfg)
         return model
     if backbone_name == "vgg":
 

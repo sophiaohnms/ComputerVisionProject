@@ -2,7 +2,7 @@ import torch
 from ssd import torch_utils
 
 
-class BasicModel(torch.nn.Module):
+class BasicModelCesar(torch.nn.Module):
     """
     This is a basic backbone for SSD.
     The feature exztractor outputs a list of 6 feature maps, with the sizes:
@@ -183,7 +183,7 @@ class BasicModel(torch.nn.Module):
         
         
         #for idx, feature in enumerate(out_features):
-        #    print(feature.shape[1:])
+            #print(feature.shape[1:])
             
         #print("OUT _0 ", out_features[0])
         

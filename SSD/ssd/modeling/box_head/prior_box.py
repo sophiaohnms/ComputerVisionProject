@@ -26,8 +26,8 @@ class PriorBox:
        # print("PRINTAS: ", enumerate(self.feature_maps))
         
         priors = []
-        
-        
+
+
         for k, f in enumerate(self.feature_maps):
             print("Feature map: ", f )
             #print(" K: ", k )
@@ -39,7 +39,7 @@ class PriorBox:
             
             print("Scale: ", [scaleX, scaleY])
             #scale = self.image_size / self.strides[k]
-            
+            """
             for i in range(int(scaleY)):
                 #print("i : ",  i)
                 for j in range(int(scaleX)):
@@ -102,7 +102,7 @@ class PriorBox:
                     ratio = sqrt(ratio)
                     priors.append([cx, cy, w * ratio, h / ratio])
                     priors.append([cx, cy, w / ratio, h * ratio])
-        """
+
                     
                     
         priors = torch.tensor(priors)
