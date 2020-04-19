@@ -22,20 +22,19 @@ class ResNet50(torch.nn.Module):
         self.layer3 = nn.Sequential(
             *list(resnet.children())[7:8]
         )
-        # print("Layer 3 ", self.layer3)
-
-        #self.layer4 = nn.Sequential(  #*ORIGINAL LAST LAYER OF RESNET50
-        #    *list(resnet.children())[-2:-1]
-        #)
-                
-        
+              
         self.layer4 = nn.Sequential(
             nn.Conv2d(2048, 2048, kernel_size=(3,3), stride=1, padding=1),
             nn.BatchNorm2d(2048),
-            nn.ReLU(),
+            nn.LeakyReLU(),
+            nn.Dropout2d(p=0.1),
             nn.Conv2d(2048, 2048, kernel_size=(3,3), stride=1, padding=1),
             nn.BatchNorm2d(2048),
-            nn.ReLU(),
+            nn.LeakyReLU(),
+            nn.Conv2d(2048, 2048, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(2048),
+            nn.LeakyReLU(),
+            nn.Dropout2d(p=0.1),
             nn.MaxPool2d(kernel_size=2, stride=2)
         )
         
@@ -43,22 +42,34 @@ class ResNet50(torch.nn.Module):
 
         self.layer5 = nn.Sequential(
             nn.Conv2d(2048, 1024, kernel_size=(3,2), stride=1, padding=1), #From [5,4] to [3,3]
-            nn.MaxPool2d(kernel_size=2, stride=2),
             nn.BatchNorm2d(1024),
-            nn.ReLU(),
+            nn.LeakyReLU(),
+            nn.Dropout2d(p=0.1),
             nn.Conv2d(1024, 1024, kernel_size=(3,3), stride=1, padding=1),
             nn.BatchNorm2d(1024),
-            nn.ReLU()
+            nn.LeakyReLU(),
+            nn.Conv2d(1024, 1024, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(1024),
+            nn.LeakyReLU(),
+            nn.Dropout2d(p=0.1),
+            nn.MaxPool2d(kernel_size=2, stride=2)
         )
         #
         # print("Layer 5: ", self.layer5)
 
         self.layer6 = nn.Sequential(
             nn.Conv2d(1024, 512, kernel_size=(3,3), stride=1, padding=1), #From [5,4] to [3,3]
-            nn.MaxPool2d(kernel_size=2, stride=2),
             nn.BatchNorm2d(512),
-            nn.ReLU(),
+            nn.LeakyReLU(),
+            nn.Dropout2d(p=0.1),
             nn.Conv2d(512, 512, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(512),
+            nn.LeakyReLU(),
+            nn.Conv2d(512, 512, kernel_size=(3,3), stride=1, padding=1),
+            nn.BatchNorm2d(512),
+            nn.LeakyReLU(),
+            nn.Dropout2d(p=0.1),
+            nn.MaxPool2d(kernel_size=2, stride=2),
             nn.AdaptiveAvgPool2d(output_size=(1, 1))
         )
 

@@ -21,10 +21,10 @@ DATASETS:
     TRAIN: ("waymo_train",)
     TEST: ("waymo_val", )
 SOLVER:
-    MAX_ITER: 30000
-    LR_STEPS: [30000, 100000] #Decay: adjust LR
+    MAX_ITER: 120000
+    LR_STEPS: [30000, 50000] #Decay: adjust LR
     GAMMA: 0.1
     BATCH_SIZE: 32
-    LR: 0.005 #Maybe a little bit too high?
-OUTPUT_DIR: 'outputs/improved'
+    LR: 15e-4 #Maybe a little bit too high?
+OUTPUT_DIR: 'outputs/resnet50'
 DATASET_DIR: "datasets"
