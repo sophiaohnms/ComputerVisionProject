@@ -11,13 +11,14 @@ def build_transforms(cfg, is_train=True):
             
             #ADD SOME DATA AUGMENTATION
             RandomMirror(), #Augmentation
+            Expand(cfg.INPUT.PIXEL_MEAN),
             ToPercentCoords(),
             RandomBrightness(), #Basic transformations
             RandomContrast(),
             RandomSaturation(),
-            #RandomHue(),
+            RandomHue(),
             #RandomLightingNoise(),
-            #Expand(cfg.INPUT.PIXEL_MEAN),  # has to be before random sample crop
+            #  # has to be before random sample crop
                                            # requires doubling training iterations
                                            # and is suggested by ssd paper to detect small objects
             RandomSampleCrop(), # "zoom-in" like in SSD paper
@@ -32,7 +33,7 @@ def build_transforms(cfg, is_train=True):
     else:
         transform = [
             Resize(cfg.INPUT.IMAGE_SIZE),
-            SubtractMeans(cfg.INPUT.PIXEL_MEAN),
+            Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
             ToTensor()
         ]
     transform = Compose(transform)
