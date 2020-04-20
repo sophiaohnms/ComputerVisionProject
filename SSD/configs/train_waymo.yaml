@@ -10,7 +10,8 @@ MODEL:
         #OUT_CHANNELS: [128, 256, 512, 512] # resnet18
         #OUT_CHANNELS: [128, 256, 512, 128, 128, 128] #resnet34
         #OUT_CHANNELS: [128, 256, 512, 512, 256, 256] #Increased depth of channels
-        OUT_CHANNELS: [512, 1024, 2048, 2048, 1024, 512] # resnet 50
+        #OUT_CHANNELS: [512, 1024, 2048, 2048, 1024, 512] # resnet 50
+        OUT_CHANNELS: [128, 256, 512, 512, 256, 256] # resnet 34 sophia
 
         #Try different OUT_CHANNELS ?
         
@@ -25,6 +26,6 @@ SOLVER:
     LR_STEPS: [30000, 50000] #Decay: adjust LR
     GAMMA: 0.1
     BATCH_SIZE: 32
-    LR: 15e-4 #Maybe a little bit too high?
-OUTPUT_DIR: 'outputs/resnet50'
+    LR: 0.01 #Maybe a little bit too high?
+OUTPUT_DIR: 'outputs/resnet34_sophia'
 DATASET_DIR: "datasets"
