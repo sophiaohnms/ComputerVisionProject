@@ -28,8 +28,8 @@ def build_transforms(cfg, is_train=True):
                                            # and is suggested by ssd paper to detect small objects
             #________________________________________
             Resize(cfg.INPUT.IMAGE_SIZE),
-            SubtractMeans(cfg.INPUT.PIXEL_MEAN),
-            # Normalize([123, 117, 104], [0.229*255, 0.224*255, 0.225*255]),
+            #SubtractMeans(cfg.INPUT.PIXEL_MEAN),
+            Normalize([123, 117, 104], [0.229*255, 0.224*255, 0.225*255]),
             ToTensor(),
 
             # potential additional transformations
