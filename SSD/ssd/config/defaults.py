@@ -48,8 +48,8 @@ cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,60], [106,120], [320, 2
 cfg.MODEL.PRIORS.MIN_SIZES = [30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 20,30 at the beginning
 cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315]
 
-#cfg.MODEL.PRIORS.MIN_SIZES = [30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 10,20 at the beginning
-#cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315]
+cfg.MODEL.PRIORS.MIN_SIZES = [[32,24], [64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2]] 
+cfg.MODEL.PRIORS.MAX_SIZES = [[64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2], [336,252]]
 
 
 

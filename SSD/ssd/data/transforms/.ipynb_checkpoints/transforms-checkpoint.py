@@ -3,7 +3,7 @@ import torch
 import cv2
 import numpy as np
 from numpy import random
-
+from albumentations import RandomSnow, RandomRain, RandomShadow, RandomFog, Rotate
 
 def intersect(box_a, box_b):
     max_xy = np.minimum(box_a[:, 2:], box_b[2:])
@@ -112,8 +112,7 @@ class ToPercentCoords(object):
 
     
 class Normalize(object):
-      
-    class SubtractMeans(object):
+
     def __init__(self, mean, std):
         self.mean = np.array(mean, dtype=np.float32)
         self.std = np.array(std, dtype=np.float32)
@@ -428,3 +427,48 @@ class PhotometricDistort(object):
             distort = Compose(self.pd[1:])
         im, boxes, labels = distort(im, boxes, labels)
         return self.rand_light_noise(im, boxes, labels)
+
+class add_snow(object):
+    def __call__(self, image, boxes=None, labels=None):
+        image = RandomSnow()(image=image)['image']
+        return image.astype(np.float32), boxes, labels
+
+
+class add_rain(object):
+    def __call__(self, image, boxes=None, labels=None):
+        image = RandomRain()(image=image)['image']
+        return image.astype(np.float32), boxes, labels
+
+
+class add_fog(object):
+    def __call__(self, image, boxes=None, labels=None):
+        image = RandomFog(p=0.1)(image=image)['image']
+        return image.astype(np.float32), boxes, labels
+
+
+class add_shadow(object):
+    def __call__(self, image, boxes=None, labels=None):
+        image = RandomShadow(p=0.25)(image=image)['image']
+        return image.astype(np.float32), boxes, labels
+
+class rotate(object):
+    def __call__(self, image, boxes=None, labels=None):
+        image = Rotate(p=0.25)(image=image)['image']
+        return image.astype(np.float32), boxes, labels
+
+class add_weather(object):
+    def __call__(self, image, boxes=None, labels=None):
+        p = random.uniform(0,1)
+        if p >= 0.5:
+            return image.astype(np.float32), boxes, labels
+        else:
+            p = random.uniform(0,1)
+            if p < 1/3:
+                image = RandomFog(p=0.1)(image=image)['image']
+                return image.astype(np.float32), boxes, labels
+            if p >= 1/3 and p < 2/3:
+                image = RandomSnow()(image=image)['image']
+                return image.astype(np.float32), boxes, labels
+            else:
+                image = RandomRain()(image=image)['image']
+                return image.astype(np.float32), boxes, labels
