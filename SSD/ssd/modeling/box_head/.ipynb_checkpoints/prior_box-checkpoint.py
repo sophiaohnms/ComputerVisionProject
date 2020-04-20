@@ -47,23 +47,28 @@ class PriorBox:
                     cy = (i + 0.5) / scaleY
                     
                     # small sized square box
-                    size = self.min_sizes[k]
-                    h = size / self.image_size[1]
-                    w = size  / self.image_size[0]
+                    sizeH = self.min_sizes[k][1]
+                    sizeW = self.min_sizes[k][0]
+                     
+                    h = sizeH / self.image_size[1]
+                    w = sizeW  / self.image_size[0]
                
                     priors.append([cx, cy, w, h])
 
                     # big sized square box
-                    size = sqrt(self.min_sizes[k] * self.max_sizes[k])
-                    h = size / self.image_size[1]
-                    w = size  / self.image_size[0]
+                    sizeH = sqrt(self.min_sizes[k][1] * self.max_sizes[k][1])
+                    sizeW = sqrt(self.min_sizes[k][0] * self.max_sizes[k][0])
+                    h = sizeH / self.image_size[1]
+                    w = sizeW  / self.image_size[0]
                 
                     priors.append([cx, cy, w, h])
 
                     # change h/w ratio of the small sized box
-                    size = self.min_sizes[k]
-                    h = size / self.image_size[1]
-                    w = size  / self.image_size[0]
+                    sizeH = self.min_sizes[k][1]
+                    sizeW = self.min_sizes[k][0]
+                    
+                    h = sizeH / self.image_size[1]
+                    w = sizeW  / self.image_size[0]
               
                     for ratio in self.aspect_ratios[k]:
                         ratio = sqrt(ratio)

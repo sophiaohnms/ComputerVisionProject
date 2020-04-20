@@ -19,8 +19,9 @@ cfg.MODEL.BACKBONE = CN()
 cfg.MODEL.BACKBONE.NAME = 'basic'
 
 
-cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 512, 512, 128)
+#cfg.MODEL.BACKBONE.OUT_CHANNELS = (128, 256, 512, 512, 512, 128)
 #cfg.MODEL.BACKBONE.OUT_CHANNELS = (512,1024,2048,2048) # resnet 50
+cfg.MODEL.BACKBONE.OUT_CHANNELS = (256,512,256,256,128,128) # resnet 34 given
 
 
 cfg.MODEL.BACKBONE.PRETRAINED = True
@@ -34,7 +35,7 @@ cfg.MODEL.PRIORS = CN()
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [2,2], [1,1]] #basic
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,3], [1,1]] #basic
 
-cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] #basic
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [2,1]] # given model
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet50
 
 
@@ -48,8 +49,8 @@ cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,60], [106,120], [320, 2
 cfg.MODEL.PRIORS.MIN_SIZES = [30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 20,30 at the beginning
 cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315]
 
-#cfg.MODEL.PRIORS.MIN_SIZES = [30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 10,20 at the beginning
-#cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315]
+cfg.MODEL.PRIORS.MIN_SIZES = [[32,24], [64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2]] 
+cfg.MODEL.PRIORS.MAX_SIZES = [[64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2], [336,252]]
 
 
 
