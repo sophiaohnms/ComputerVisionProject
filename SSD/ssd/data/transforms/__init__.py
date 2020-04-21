@@ -11,7 +11,7 @@ def build_transforms(cfg, is_train=True):
             
             #ADD SOME DATA AUGMENTATION
             RandomMirror(), #Augmentation
-            Expand(cfg.INPUT.PIXEL_MEAN),
+            #Expand(cfg.INPUT.PIXEL_MEAN),
             RandomSampleCrop(),  # "zoom-in" like in SSD paper
             ToPercentCoords(),
             #RandomBrightness(), #Basic transformations
