@@ -64,7 +64,7 @@ class GivenModel(torch.nn.Module):
         fm, sm = 2, 2
 
         self.resnetlayer0 = nn.Sequential(
-            *list(original_model.children())[0:4]
+            *list(original_model.children())[0:3]
         )
 
         self.resnetlayer1 = nn.Sequential(
@@ -77,12 +77,17 @@ class GivenModel(torch.nn.Module):
         )
         # print("Layer 2: ", self.layer2)
 
+        self.resnetlayer3 = nn.Sequential(
+                *list(original_model.children())[6:7]
+        )
+
         self.layer1 = nn.Sequential(
             self.resnetlayer0,
             self.resnetlayer1,
             self.resnetlayer2,
+            self.resnetlayer3,
             nn.Conv2d(
-                in_channels=128,
+                in_channels=256,
                 out_channels=256,
                 kernel_size=fc,
                 stride=1,
