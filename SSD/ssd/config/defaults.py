@@ -36,32 +36,34 @@ cfg.MODEL.PRIORS = CN()
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,3], [1,1]] #basic
 
 cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [1,1]] # given model
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [5,4], [3,2], [2,1], [1,1]] # given model
+
 #cfg.MODEL.PRIORS.FEATURE_MAPS = [[40, 30], [20,15], [10,8], [1,1]] #resnet50
 
 
 #cfg.MODEL.PRIORS.STRIDES = [4, 8, 16, 32, 64, 100, 320] #Number of pixels between each box (In this case is: image size / feature map)
 #cfg.MODEL.PRIORS.STRIDES = [8, 16, 32, 64, 100, 320]
 
-cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,60], [106,120], [320, 240]] #for 3x2 box
+cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,60], [106,120], [160,240], [320, 240]] #for 3x2 box
 
 #cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [32,30], [64,48], [160,120], [320, 240]] #for 2x2 box
 
 cfg.MODEL.PRIORS.MIN_SIZES = [30, 60, 111, 162, 213, 264] #We may want smaller/larger sizes. *Added 20,30 at the beginning
 cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315]
 
-cfg.MODEL.PRIORS.MIN_SIZES = [[32,24], [64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2]] 
-cfg.MODEL.PRIORS.MAX_SIZES = [[64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2], [336,252]]
+cfg.MODEL.PRIORS.MIN_SIZES = [[32,24], [64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [227.2,211.2], [281.6, 211.2]] 
+cfg.MODEL.PRIORS.MAX_SIZES = [[64,48], [118.4, 88.8], [172.8, 129.6], [227.2, 170.4], [281.6, 211.2],[300, 252], [336,252]]
 
 
 
 #cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2,3], [2, 3], [2, 3], [2, 3], [2], [2]] #Added [2] at the beginning
 # When has 1 aspect ratio, every location has 4 boxes, 2 ratio 6 boxes.
 # #boxes = 2 + #ratio * 2
-cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3], [2], [2]]
+cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3], [2], [2], [2]]
 
 
 #cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 6, 4, 4]  # number of boxes per feature map location. Added 4 at the beginning.
-cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 4, 4]
+cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 4, 4, 4]
 
 cfg.MODEL.PRIORS.CLIP = True
 
@@ -126,8 +128,8 @@ cfg.TEST.BATCH_SIZE = 10
 # ---------------------------------------------------------------------------- #
 # Specific test options
 # ---------------------------------------------------------------------------- #
-cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0
-cfg.MODEL_SAVE_STEP = 500 # Save checkpoint every save_step
+cfg.EVAL_STEP = 1000 # Evaluate dataset every eval_step, disabled when eval_step < 0
+cfg.MODEL_SAVE_STEP = 1000 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 cfg.OUTPUT_DIR = "outputs"
 cfg.DATASET_DIR = "datasets"
