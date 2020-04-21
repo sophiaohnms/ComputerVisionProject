@@ -150,7 +150,7 @@ class GivenModel(torch.nn.Module):
         l7 = self.layer6(l6)
         #print("L7: ", l7.size())
 
-        out_features = [l1, l2, l3, l4, l5, l6]
+        out_features = [l1, l2, l3, l4, l5, l7]
 
         for idx, feature in enumerate(out_features):
            print(feature.shape[1:])
