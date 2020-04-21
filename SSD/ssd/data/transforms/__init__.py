@@ -14,10 +14,10 @@ def build_transforms(cfg, is_train=True):
             #Expand(cfg.INPUT.PIXEL_MEAN),
             RandomSampleCrop(),  # "zoom-in" like in SSD paper
             ToPercentCoords(),
-            #RandomBrightness(), #Basic transformations
-            #RandomContrast(),
+            RandomBrightness(), #Basic transformations
+            RandomContrast(),
             RandomSaturation(),
-            #RandomHue(),
+            RandomHue(),
             # Albumentation Augmentations
             add_weather(),
             add_shadow(),
