@@ -23,7 +23,7 @@ DATASETS:
     TRAIN: ("waymo_train",)
     TEST: ("waymo_val", )
 SOLVER:
-    MAX_ITER: 120000
+    MAX_ITER: 50000
     LR_STEPS: [30000, 50000] #Decay: adjust LR
     GAMMA: 0.1
     BATCH_SIZE: 32
