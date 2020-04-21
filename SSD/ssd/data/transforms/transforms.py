@@ -120,7 +120,7 @@ class Normalize(object):
     def __call__(self, image, boxes=None, labels=None):
         image = image.astype(np.float32)
         image -= self.mean
-        image /= self.std
+        image = image / self.std
         return image.astype(np.float32), boxes, labels
 
     

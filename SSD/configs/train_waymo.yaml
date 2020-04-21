@@ -12,7 +12,7 @@ MODEL:
         #OUT_CHANNELS: [128, 256, 512, 512, 256, 256] #Increased depth of channels
         #OUT_CHANNELS: [512, 1024, 2048, 2048, 1024, 512] # resnet 50
         #OUT_CHANNELS: [128, 256, 512, 512, 256, 256] # resnet 34 sophia
-        OUT_CHANNELS: [256,512,256,256,128,128] # resnet 34 given
+        OUT_CHANNELS: [256,512,256,256,128,128, 64] # resnet 34 given
 
         #Try different OUT_CHANNELS ?
         
@@ -28,5 +28,5 @@ SOLVER:
     GAMMA: 0.1
     BATCH_SIZE: 32
     LR: 0.01 #Maybe a little bit too high?
-OUTPUT_DIR: 'outputs/resnet34_sophia'
+OUTPUT_DIR: 'outputs/maxpool_error'
 DATASET_DIR: "datasets"

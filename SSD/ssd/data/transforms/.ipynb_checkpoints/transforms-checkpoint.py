@@ -110,7 +110,7 @@ class ToPercentCoords(object):
 
         return image, boxes, labels
 
-    
+"""    
 class Normalize(object):
 
     def __init__(self, mean, std):
@@ -122,8 +122,24 @@ class Normalize(object):
         image -= self.mean
         image /= self.std
         return image.astype(np.float32), boxes, labels
-
+"""
     
+class Normalize(object):
+
+    def __init__(self, mean, std, inplace=False):
+        self.mean = mean
+        self.std = std
+        self.inplace = inplace
+
+    def __call__(self, tensor):
+        """
+        Args:
+            tensor (Tensor): Tensor image of size (C, H, W) to be normalized.
+
+        Returns:
+            Tensor: Normalized Tensor image.
+        """
+        return F.normalize(tensor, self.mean, self.std, self.inplace)
     
     
 
