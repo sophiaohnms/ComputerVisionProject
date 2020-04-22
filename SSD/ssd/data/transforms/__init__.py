@@ -11,17 +11,17 @@ def build_transforms(cfg, is_train=True):
             
             #ADD SOME DATA AUGMENTATION
             RandomMirror(), #Augmentation
-            #Expand(cfg.INPUT.PIXEL_MEAN),
+            Expand(cfg.INPUT.PIXEL_MEAN),
             RandomSampleCrop(),  # "zoom-in" like in SSD paper
             ToPercentCoords(),
             #RandomBrightness(), #Basic transformations
             #RandomContrast(),
-            RandomSaturation(),
+            #RandomSaturation(),
             #RandomHue(),
             # Albumentation Augmentations
-            add_weather(),
+            #add_weather(),
             #add_shadow(),
-            rotate(),
+            #rotate(),
             #RandomLightingNoise(),
             #  # has to be before random sample crop
                                            # requires doubling training iterations
