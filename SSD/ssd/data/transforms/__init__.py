@@ -19,9 +19,9 @@ def build_transforms(cfg, is_train=True):
             #RandomSaturation(),
             #RandomHue(),
             # Albumentation Augmentations
-            #add_weather(),
+            add_weather(),
             #add_shadow(),
-            #rotate(),
+            rotate(),
             #RandomLightingNoise(),
             #  # has to be before random sample crop
                                            # requires doubling training iterations

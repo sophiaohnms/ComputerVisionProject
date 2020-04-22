@@ -463,10 +463,7 @@ class add_weather(object):
             return image.astype(np.float32), boxes, labels
         else:
             p = random.uniform(0,1)
-            if p < 1/3:
-                image = RandomFog(p=0.1)(image=image)['image']
-                return image.astype(np.float32), boxes, labels
-            if p >= 1/3 and p < 2/3:
+            if p < 1/2:
                 image = RandomSnow()(image=image)['image']
                 return image.astype(np.float32), boxes, labels
             else:
